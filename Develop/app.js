@@ -7,6 +7,7 @@ const port = 3000
 app.use(express.static('public'))
 const parser = bodyParser.urlencoded({extended: true})
 const jsonParser = bodyParser.json()
+const uniqid = require('uniqid')
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname+'/public/index.html'))
@@ -22,6 +23,7 @@ app.get('/notes', (req, res) => {
 
   app.post('/api/notes',jsonParser,(req,res) =>{
     let data = req.body
+    data['id'] = uniqid()
     let db = fs.readFileSync("db/db.json")
     let read=JSON.parse(db)
     read.push(data)
