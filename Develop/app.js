@@ -33,6 +33,19 @@ app.get('/notes', (req, res) => {
     
   })
 
+  app.delete('/api/notes/:id',(req,res) =>{
+  let noteid = req.params.id
+  let db = fs.readFileSync("db/db.json")
+  let read=JSON.parse(db)
+ const newList= read.filter((item) => item['id']!=noteid)
+   let finalJSON = JSON.stringify(newList)
+   fs.writeFileSync("db/db.json",finalJSON)
+   res.sendStatus(200)
+
+    
+  })
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
