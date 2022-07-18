@@ -3,7 +3,7 @@ const path = require('path')
 const fs = require("fs")
 const bodyParser = require('body-parser')
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3001;
 app.use(express.static('public'))
 const parser = bodyParser.urlencoded({extended: true})
 const jsonParser = bodyParser.json()
@@ -45,7 +45,8 @@ app.get('/notes', (req, res) => {
     
   })
 
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  connection.sync({ force: false }).then(() => {
+    app.listen(PORT, () => {
+      console.log(`Backend Server Live on ${PORT}`);
+    });
+  });
