@@ -45,8 +45,6 @@ app.get('/notes', (req, res) => {
     
   })
 
-  connection.sync({ force: false }).then(() => {
-    app.listen(PORT, () => {
-      console.log(`Backend Server Live on ${PORT}`);
-    });
+  app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}!`);
   });
